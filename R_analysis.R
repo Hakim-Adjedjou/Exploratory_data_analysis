@@ -60,4 +60,4 @@ res<-data.frame(population_freq,dt$State)
 
 res<-res %>% group_by(population_freq) %>% summarize(res , count=n(), States= paste(res$dt.State,collapse=", "))
 
-View(res2)
+View(res)
