@@ -58,6 +58,5 @@ population_freq<-cut(dt$Population, breaks = breaks , right = T , include.lowest
 
 res<-data.frame(population_freq,dt$State)
 
-res<-res %>% group_by(population_freq) %>% summarize(res , count=n(), States= paste(res$dt.State,collapse=", "))
-
+res<-res %>% group_by(population_freq) %>% summarise(count=n(),states=toString(unique(dt.State)))
 View(res)
