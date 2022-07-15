@@ -58,5 +58,18 @@ population_freq<-cut(dt$Population, breaks = breaks , right = T , include.lowest
 
 res<-data.frame(population_freq,dt$State)
 
-res<-res %>% group_by(population_freq) %>% summarise(count=n(),states=toString(unique(dt.State)))
+res<-res %>% group_by(population_freq, .drop=F) %>% summarise(count=n(),states=toString(unique(dt.State)))
 View(res)
+
+# the population feature was transformed to categorical data with interval with another column containing the states that falls in that interval
+
+#now for the murder rate feature , we can plot a density plot : 
+hist(dt$Murder.Rate , freq = F)
+
+#to check the precise value as data frame , you can run : 
+murder_freq<-cut(dt$Murder.Rate, breaks = c(0,1,2,3,4,5,6,7,8,9,10,11) , right = T , include.lowest = T, dig.lab = 2)
+res2<-data.frame(murder_freq,dt$State)
+res2<-res2 %>% group_by(murder_freq, .drop=F) %>% summarise(count=n()/50)
+
+#
+lines(density(dt$Murder.Rate),lwd=3 ,col="blue")
